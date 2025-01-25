@@ -1,0 +1,19 @@
+
+  .form-check-input[type="checkbox"] {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    appearance: none; /* Removes the default checkbox styling */
+    outline: none;
+    cursor: pointer;
+  }
+
+  .form-check-input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+
+
