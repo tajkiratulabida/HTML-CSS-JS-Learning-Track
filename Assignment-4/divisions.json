@@ -1,0 +1,6 @@
+{
+    "Dhaka": ["Dhaka", "Gazipur", "Narayanganj", "Tangail"],
+    "Chittagong": ["Chittagong", "Cox's Bazar", "Rangamati"],
+    "Sylhet": ["Sylhet", "Moulvibazar", "Habiganj", "Sunamganj"],
+    "Rajshahi": ["Rajshahi", "Pabna", "Natore", "Bogra"]
+}

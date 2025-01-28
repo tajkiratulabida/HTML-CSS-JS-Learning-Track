@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Maker</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="cvForm">
+        <h2>Personal Information</h2>
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+        <textarea id="address" name="address" placeholder="Address" required></textarea>
+        <input type="date" id="dob" name="dob" required>
+
+        <h2>Education</h2>
+        <div id="educationSection">
+            <div class="educationRow">
+                <input type="text" name="qualification[]" placeholder="Qualification" required>
+                <input type="text" name="institution[]" placeholder="Institution" required>
+                <input type="number" name="graduationYear[]" placeholder="Graduation Year" required>
+                <button type="button" class="addEducation">Add Education</button>
+            </div>
+        </div>
+
+        <h2>Skills</h2>
+        <select id="skills" name="skills[]" multiple="multiple">
+            <option value="Programming">Programming</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Graphic Design">Graphic Design</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Data Analysis">Data Analysis</option>
+        </select>
+
+        <h2>Work Experience</h2>
+        <div id="workExperienceSection">
+            <div class="workRow">
+                <input type="text" name="jobTitle[]" placeholder="Job Title" required>
+                <input type="text" name="company[]" placeholder="Company Name" required>
+                <input type="text" name="duration[]" placeholder="Duration" required>
+                <button type="button" class="addWorkExperience">Add More</button>
+            </div>
+        </div>
+
+        <h2>Languages</h2>
+        <select id="languages" name="languages[]" multiple="multiple">
+            <option value="English">English</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+        </select>
+
+        <h2>Location</h2>
+        <select id="division" name="division" required>
+            <option value="">Select Division</option>
+        </select>
+        <select id="district" name="district" required>
+            <option value="">Select District</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="cv-maker.js"></script>
+</body>
+</html>

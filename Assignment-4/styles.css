@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+h2 {
+    margin-top: 20px;
+    color: #333;
+}
+input, textarea, select, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button {
+    width: auto;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background: #0056b3;
+}
+.addEducation, .addWorkExperience {
+    width: auto;
+    background: #28a745;
+    color: white;
+}
+.select2-container--default 
+.select2-selection--multiple 
+.select2-selection__choice__remove {
+    margin-top: -0.01px;
+}
