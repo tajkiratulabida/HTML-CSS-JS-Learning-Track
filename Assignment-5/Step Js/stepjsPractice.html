@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planner Application</title>
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    
+    <!-- TinyMCE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js"
+        integrity="sha512-/4EpSbZW47rO/cUIb0AMRs/xWwE8pyOLf8eiDWQ6sQash5RP1Cl8Zi2aqa4QEufjeqnzTK8CLZWX7J5ZjLcc1Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+    <!-- Toastr CSS & JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Original CSS File -->
+    <link rel="stylesheet" href="./stepjscss.css">
+    
+    <style>
+        .steps ul {
+            font-size: 20px;
+        }
+        .wizard > .actions > ul {
+            font-size: 16px;
+        }
+        #contact input[type="text"], #contact input[type="email"], #contact input[type="tel"] {
+            font-size: 16px;
+        }
+        /* Datepicker Styling */
+        #datepicker {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.2s ease-in-out;
+        }
+        #datepicker:focus {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="contact" action="#">
+            <div>
+                <h3>Account</h3>
+                <section style="font-size: 16px;">
+                    <label for="userName">User name *</label>
+                    <input id="userName" name="userName" type="text" class="required" placeholder="Enter your username">
+                    
+                    <label for="password">Password *</label>
+                    <input id="password" name="password" type="text" class="required" placeholder="Enter your password">
+                    
+                    <label for="confirm">Confirm Password *</label>
+                    <input id="confirm" name="confirm" type="text" class="required" placeholder="Re-enter your password">
+                    
+                    <p>(*) Mandatory</p>
+                </section>
+            
+                <h3>Profile</h3>
+                <section style="font-size: 16px;">
+                    <label for="name">First name *</label>
+                    <input id="name" name="name" type="text" class="required" placeholder="Enter your first name">
+                    
+                    <label for="surname">Last name *</label>
+                    <input id="surname" name="surname" type="text" class="required" placeholder="Enter your last name">
+                    
+                    <label for="email">Email *</label>
+                    <input id="email" name="email" type="text" class="required email" placeholder="Enter your email address">
+                    
+                    <label for="phone">Phone *</label><br>
+                    <input id="phone" name="phone" type="tel" class="required">
+                </section>
+
+                <h3>Event Details</h3>
+                <section style="font-size: 16px;">
+                    <label for="eventVenue">Event Venue *</label>
+                    <input id="eventVenue" name="eventVenue" type="text" class="required" placeholder="Type to search venue">
+                    
+                    <label for="datepicker">Event Date *</label>
+                    <input id="datepicker" name="datepicker" type="text" class="required" placeholder="Select event date">
+                    
+                    <label for="eventDescription">Event Description</label>
+                    <textarea id="eventDescription" name="eventDescription" placeholder="Enter event details"></textarea> 
+                </section>
+                
+                <h3>Finish</h3>
+                <section style="font-size: 16px;">
+                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> 
+                    <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                </section>
+            </div>            
+        </form>
+    </div>
+    
+    <!-- Include jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var form = $("#contact");
+            form.validate({
+                errorPlacement: function errorPlacement(error, element) { element.before(error); },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+            form.children("div").steps({
+                headerTag: "h3",
+                bodyTag: "section",
+                transitionEffect: "slideLeft",
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                },
+                onFinishing: function (event, currentIndex) {
+                    form.validate().settings.ignore = ":disabled";
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    if ($("#contact").valid()) { 
+                        toastr.success("Form submitted successfully!");
+                    }
+                }
+
+            });
+
+            // Event Venues in Bangladesh
+            const eventVenues = [
+                "International Convention City Bashundhara",
+                "Bangabandhu International Conference Center",
+                "The Olives",
+                "Pan Pacific Sonargaon Dhaka",
+                "Kushiara International Convention Hall",
+                "Paragon Convention Hall",
+                "Fortune Square Convention Hall",
+                "Secret Garden Event Spaces",
+                "Dhaka Arena",
+                "Nutmeg",
+                "Base Camp Sports Ground",
+                "Sheraton Dhaka",
+                "InterContinental Dhaka",
+                "Raowa Convention Centre",
+                "Samarai Convention Centre",
+                "Spectra Convention Centre"
+            ];
+
+            // Initialize Autocomplete for Event Venue
+            $("#eventVenue").autocomplete({
+                source: eventVenues,
+                minLength: 1,
+                delay: 100
+            });
+
+            // Initialize Datepicker for Event Date
+            $("#datepicker").datepicker({
+                dateFormat: "dd-mm-yy", 
+                maxDate: "+10d", // Allow selecting up to 10 days from today
+                changeMonth: true,
+                changeYear: true,
+            });
+
+            // Initialize Intl-Tel-Input
+            const phoneInput = document.querySelector("#phone");
+            if (phoneInput) {
+                window.intlTelInput(phoneInput, {
+                    initialCountry: "bd",
+                    preferredCountries: ["bd", "us"],
+                    // onlyCountries: ["bd"],
+                    separateDialCode: true,
+                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+                });
+            }
+
+            // Initialize TinyMCE for Event Description
+            tinymce.init({
+                selector: '#eventDescription',
+                plugins: 'lists link image table code',
+                toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image | code',
+                height: 300
+            });
+        });
+    </script>
+</body>
+</html>
