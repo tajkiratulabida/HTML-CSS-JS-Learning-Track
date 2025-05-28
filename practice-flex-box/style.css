@@ -1,0 +1,28 @@
+.container{
+    background-color: #eee;
+    display: flex;
+    /* gap: 250px; */
+    justify-content: space-between;
+}
+
+.item{
+    font-size: 25px;
+    font-weight: bold;
+    color: blueviolet;
+}
+
+.container-2{
+    background-color: #ddd;
+    margin-top: 30px;
+    display: flex; 
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.item-2{
+    font-size: 25px;
+    font-weight: bold;
+    color: blue;
+    background-color: aliceblue;
+}
+
